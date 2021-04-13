@@ -1,0 +1,40 @@
+{
+  "name": "splintr/php-sdk",
+  "license": "MIT",
+  "description": "Splintr PHP Client Library",
+  "version": "0.0.1",
+  "keywords": [
+    "spinltr",
+    "spinltr php sdk",
+    "buy now pay later",
+    "installment"
+  ],
+  "homepage": "https://www.splintr.com/",
+  "authors": [
+    {
+      "name": "Splintr Team",
+      "email": "tech@tamara.co"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "ext-json": "*",
+    "psr/http-client": "^1.0",
+    "illuminate/container": "~5.0"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.1",
+    "squizlabs/PHP_CodeSniffer": "3.*",
+    "phpunit/phpunit": "^9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Splintr\\PhpSdk\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Splintr\\PhpSdk\\Tests\\": "tests/"
+    }
+  }
+}
