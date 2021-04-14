@@ -161,7 +161,8 @@ class Uri
             $url .= "{$this->path}";
         }
 
-        if (!empty($this->query->all())) {
+        $allParameters = $this->query->all();
+        if (!empty($allParameters)) {
             $collection = [];
             foreach ($this->query->all() as $key => $value) {
                 $collection[] = "{$key}={$value}";
