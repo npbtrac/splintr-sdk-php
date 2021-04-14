@@ -19,7 +19,7 @@
   "require": {
     "php": ">=5.5",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^6.5.0"
+    "guzzlehttp/guzzle": "6.5.5"
   },
   "require-dev": {
     "coenjacobs/mozart": "~0.7.0",

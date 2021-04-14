@@ -38,6 +38,11 @@ class Client
         $this->prepareTransport();
     }
 
+    /**
+     * Get Base URL of API
+     *
+     * @return mixed
+     */
     public function getBaseUrl()
     {
         return $this->baseUrl;
@@ -57,9 +62,9 @@ class Client
             $this->getApiPath('merchant-estore/checkout')
         );
 
-        /** @var CreateCheckoutResponse $createCheckoutResponse */
-        $createCheckoutResponse = $this->generateApiResponse($apiResponse, CreateCheckoutResponse::class);
-        return $createCheckoutResponse;
+        /** @var CreateCheckoutResponse $apiSplintrResponse */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, CreateCheckoutResponse::class);
+        return $apiSplintrResponse;
     }
 
     public function getApiPath($path)
@@ -85,14 +90,14 @@ class Client
      */
     protected function generateApiResponse(ResponseInterface $apiResponse, $apiResponseClass)
     {
-        if ($this->isSuccessfulStatusCode($apiResponse->getStatusCode())) {
+        if (!$this->isSuccessfulStatusCode($apiResponse->getStatusCode())) {
             throw new ApiErrorException('Splintr API error. Please try again later!');
         }
 
-        $apiResponse = new $apiResponseClass();
-        $apiResponse->populateFromStream($apiResponse->getBody());
+        $apiSplintrResponse = new $apiResponseClass();
+        $apiSplintrResponse->populateFromStream($apiResponse->getBody());
 
-        return $apiResponse;
+        return $apiSplintrResponse;
     }
 
     /**
