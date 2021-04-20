@@ -7,8 +7,8 @@ require_once 'vendor/autoload.php';
 
 /**
  * "store_secret": "9332B5CF-5937-4C4F-AEC8-FAB5BE0D7871",
-"store_key": "865f5bafbf83f5efd97ff1922462c022",
-"store_public_key": "9332B5CF-5B31-46A5-8B19-E2B96330FB10",
+ * "store_key": "865f5bafbf83f5efd97ff1922462c022",
+ * "store_public_key": "9332B5CF-5B31-46A5-8B19-E2B96330FB10",
  */
 
 $splintrClient = new \Splintr\PhpSdk\Core\Client(
@@ -23,8 +23,6 @@ $splintrClient = new \Splintr\PhpSdk\Core\Client(
 
 $createCheckoutRequest = new \Splintr\PhpSdk\Models\CreateCheckoutRequest();
 
-$createCheckoutRequest->setProductType(\Splintr\PhpSdk\Models\CreateCheckoutRequest::PRODUCT_TYPE_IDP);
-
 $orderItemCollection = new \Splintr\PhpSdk\Models\OrderItemCollection();
 $orderItemCollection->addOrderItem(new \Splintr\PhpSdk\Models\OrderItem([
     'quantity' => '1',
@@ -35,9 +33,19 @@ $orderItemCollection->addOrderItem(new \Splintr\PhpSdk\Models\OrderItem([
     'product_url' => 'https://store.wordpress.com/2018/11/old-school-products.html',
     'description' => 'Good Pair of Shoes',
 ]));
+$orderItemCollection->addOrderItem(new \Splintr\PhpSdk\Models\OrderItem([
+    'quantity' => '2',
+    'reference_id' => '56789',
+    'title' => 'Shoe Pair Bad',
+    'unit_price' => '18',
+    'image_url' => 'https://store.wordpress.com/2018/11/old-school-products.jpg',
+    'product_url' => 'https://store.wordpress.com/2018/11/old-school-products.html',
+    'description' => 'Bad Pair of Shoes',
+]));
 
-$ordersHistory = new \Splintr\PhpSdk\Models\OrdersHistory();
-$ordersHistory->addOrderHistory(new \Splintr\PhpSdk\Models\OrderHistory([
+$ordersHistory = new \Splintr\PhpSdk\Models\OrderHistoryCollection();
+
+$orderHistory = new \Splintr\PhpSdk\Models\OrderHistory([
     'amount' => '500',
     'payment_method' => 'paymentgateway',
     'ordered' => '1',
@@ -51,7 +59,7 @@ $ordersHistory->addOrderHistory(new \Splintr\PhpSdk\Models\OrderHistory([
         'city' => 'Dubai',
         'country' => 'AE',
     ]),
-]));
+]);
 
 $orderItemCollectionForOrderHistory = new \Splintr\PhpSdk\Models\OrderItemCollection();
 $orderItemCollectionForOrderHistory->addOrderItem(new \Splintr\PhpSdk\Models\OrderItem([
@@ -63,6 +71,9 @@ $orderItemCollectionForOrderHistory->addOrderItem(new \Splintr\PhpSdk\Models\Ord
     'product_url' => 'https://store.wordpress.com/2018/11/old-school-products.html',
     'description' => 'Good Pair of Shoes',
 ]));
+$orderHistory->setItems($orderItemCollectionForOrderHistory);
+
+$ordersHistory->addOrderHistory($orderHistory);
 
 $order = new \Splintr\PhpSdk\Models\Order([
     'reference_id' => '123467',
@@ -74,29 +85,33 @@ $order = new \Splintr\PhpSdk\Models\Order([
     'tax_amount' => '0',
     'discount_amount' => '0',
     'description' => 'something about the order',
-    'customer' => new \Splintr\PhpSdk\Models\CustomerContact([
-        'email' => 'test@gmail.com',
-        'phone' => '1458778965',
-        'name' => 'Test Customer',
-        'address' => new \Splintr\PhpSdk\Models\Address([
-            'line_1' => 'Business Bay',
-            'city' => 'Dubai',
-            'country' => 'AE',
-        ]),
-        'history' => new \Splintr\PhpSdk\Models\OrderHistory([
-            'gender' => 'F',
-            'registered_since' => '2018-08-01',
-            'dob' => '1993-01-01',
-            'loyalty_score' => '7',
-            'wishlist_count' => '2',
-        ]),
-    ]),
 ]);
-$order->setOrderCollection($orderItemCollection);
+$order->setItems($orderItemCollection);
+$order->setOrdersHistory($ordersHistory);
+$order->setCustomer(new \Splintr\PhpSdk\Models\CustomerContact([
+    'email' => 'test@gmail.com',
+    'phone' => '1458778965',
+    'name' => 'Test Customer',
+    'address' => new \Splintr\PhpSdk\Models\Address([
+        'line_1' => 'Business Bay',
+        'city' => 'Dubai',
+        'country' => 'AE',
+    ]),
+    'history' => new \Splintr\PhpSdk\Models\CustomerHistory([
+        'gender' => 'F',
+        'registered_since' => '2018-08-01',
+        'dob' => '1993-01-01',
+        'loyalty_score' => '7',
+        'wishlist_count' => '2',
+    ]),
+]));
+$order->setProductTypeIbp();
 
-//$checkoutResponse = $splintrClient->createCheckoutRequest();
-//
-//dump($checkoutResponse);
+//dump($order);
+
+$checkoutResponse = $splintrClient->createCheckoutRequest($order);
+
+dump($checkoutResponse);
 
 //$client = new \Splintr\PhpSdk\Dependencies\GuzzleHttp\Client();
 ////$client = new GuzzleHttp\Client();

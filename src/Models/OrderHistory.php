@@ -3,7 +3,6 @@
 
 namespace Splintr\PhpSdk\Models;
 
-
 use Splintr\PhpSdk\Traits\ConfigTrait;
 
 class OrderHistory
@@ -18,10 +17,9 @@ class OrderHistory
     protected $refunded;
     protected $description;
     protected $purchasedAt;
-    protected $items;
 
     /** @var OrderItemCollection */
-    protected $orderItemCollection;
+    protected $items;
 
     /** @var Address */
     protected $address;
@@ -31,8 +29,17 @@ class OrderHistory
         $this->bindConfig($config);
     }
 
-    public function setOrderCollection(OrderItemCollection $orderItemCollection)
+    public function setItems(OrderItemCollection $orderItemCollection)
     {
-        $this->orderItemCollection = $orderItemCollection;
+        $this->items = $orderItemCollection;
+    }
+
+    public function generateParamsArray()
+    {
+        $params = $this->generateNonObjectParamsArrayFromAttributes();
+        $params['address'] = $this->address->toString();
+        $params['items'] = $this->items->generateParamsArray();
+
+        return $params;
     }
 }

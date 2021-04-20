@@ -4,7 +4,7 @@
 namespace Splintr\PhpSdk\Models;
 
 
-class OrdersHistory
+class OrderHistoryCollection
 {
     /** @var OrderHistory[] */
     protected $items;
@@ -19,5 +19,15 @@ class OrdersHistory
         }
 
         $this->items[] = $orderHistory;
+    }
+
+    public function generateParamsArray()
+    {
+        $params = [];
+        foreach ($this->items as $tmpIndex => $item) {
+            $params[] = $item->generateParamsArray();
+        }
+
+        return $params;
     }
 }

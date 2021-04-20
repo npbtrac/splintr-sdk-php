@@ -24,4 +24,13 @@ class CustomerContact
     {
         $this->bindConfig($config);
     }
+
+    public function generateParamsArray()
+    {
+        $params = $this->generateNonObjectParamsArrayFromAttributes();
+        $params['address'] = $this->address->generateNonObjectParamsArrayFromAttributes();
+        $params['history'] = $this->history->generateNonObjectParamsArrayFromAttributes();
+
+        return $params;
+    }
 }

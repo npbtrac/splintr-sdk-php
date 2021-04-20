@@ -19,4 +19,13 @@ class OrderItemCollection
 
         $this->items[] = $orderItem;
     }
+
+    public function generateParamsArray() {
+        $params = [];
+        foreach ($this->items as $tmpIndex => $item) {
+            $params[] = $item->generateNonObjectParamsArrayFromAttributes();
+        }
+
+        return $params;
+    }
 }
