@@ -39,7 +39,11 @@ abstract class BaseApiResponse implements ApiResponseInterface
 
             if ($this->rawContent) {
                 $jsonContent = json_decode($this->rawContent, true);
+                // Mainly for binding `data` field
                 $this->bindConfig($jsonContent);
+
+                // Use `data` to bind all necessary attributes
+                $this->bindConfig($this->data);
             }
         }
     }

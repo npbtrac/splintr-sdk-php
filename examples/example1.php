@@ -21,8 +21,6 @@ $splintrClient = new \Splintr\PhpSdk\Core\Client(
     ]
 );
 
-$createCheckoutRequest = new \Splintr\PhpSdk\Models\CreateCheckoutRequest();
-
 $orderItemCollection = new \Splintr\PhpSdk\Models\OrderItemCollection();
 $orderItemCollection->addOrderItem(new \Splintr\PhpSdk\Models\OrderItem([
     'quantity' => '1',
@@ -108,13 +106,15 @@ $order->setCustomer(new \Splintr\PhpSdk\Models\CustomerContact([
 $order->setProductTypeIbp();
 
 //dump($order);
+$createCheckoutRequestRequest = $splintrClient->generateCreateCheckoutRequestRequest($order);
+$createCheckoutResponse = $splintrClient->createCheckoutRequest($createCheckoutRequestRequest);
+dump($createCheckoutResponse);
 
-$checkoutResponse = $splintrClient->createCheckoutRequest($order);
+$getAccessTokenRequest = $splintrClient->generateGetAccessTokenRequest();
+$getAccessTokenResponse = $splintrClient->getAccessToken($getAccessTokenRequest);
+dump($getAccessTokenResponse);
 
-dump($checkoutResponse);
-
-//$client = new \Splintr\PhpSdk\Dependencies\GuzzleHttp\Client();
-////$client = new GuzzleHttp\Client();
-//$response = $client->get('http://guzzlephp.org');
-//
-//dump($response);
+$getRequestByTokenRequest = $splintrClient->generateGetRequestByTokenRequest($createCheckoutResponse->getToken());
+dump($getRequestByTokenRequest);
+$getRequestByTokenResponse = $splintrClient->getRequestByToken($getRequestByTokenRequest);
+dump($getRequestByTokenResponse);
