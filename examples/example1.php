@@ -108,13 +108,16 @@ $order->setProductTypeIbp();
 //dump($order);
 $createCheckoutRequestRequest = $splintrClient->generateCreateCheckoutRequestRequest($order);
 $createCheckoutResponse = $splintrClient->createCheckoutRequest($createCheckoutRequestRequest);
-dump($createCheckoutResponse);
+//dump($createCheckoutResponse);
 
 $getAccessTokenRequest = $splintrClient->generateGetAccessTokenRequest();
 $getAccessTokenResponse = $splintrClient->getAccessToken($getAccessTokenRequest);
-dump($getAccessTokenResponse);
+//dump($getAccessTokenResponse);
+
+$getRequestByTokenRequest = $splintrClient->generateGetRequestByTokenRequest('asdfasdfasdfasdfasdfasdfasdfasdfasdf');
+$getRequestByTokenResponse = $splintrClient->getRequestByToken($getRequestByTokenRequest);
+//dump($getRequestByTokenResponse);
 
 $getRequestByTokenRequest = $splintrClient->generateGetRequestByTokenRequest($createCheckoutResponse->getToken());
-dump($getRequestByTokenRequest);
 $getRequestByTokenResponse = $splintrClient->getRequestByToken($getRequestByTokenRequest);
-dump($getRequestByTokenResponse);
+//dump($getRequestByTokenResponse);

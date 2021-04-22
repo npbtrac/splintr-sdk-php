@@ -1,8 +1,9 @@
 <?php
 
 
-namespace Splintr\PhpSdk\Models;
+namespace Splintr\PhpSdk\Models\MerchantEstore;
 
+use Splintr\PhpSdk\Models\BaseApiResponse;
 
 class GetRequestByTokenResponse extends BaseApiResponse
 {

@@ -1,9 +1,10 @@
 <?php
 
 
-namespace Splintr\PhpSdk\Models;
+namespace Splintr\PhpSdk\Models\MerchantEstore;
 
 use Splintr\PhpSdk\Dependencies\Psr\Http\Message\StreamInterface;
+use Splintr\PhpSdk\Models\BaseApiResponse;
 
 class CreateCheckoutRequestResponse extends BaseApiResponse
 {

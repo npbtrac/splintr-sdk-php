@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Splintr\PhpSdk\Models;
+namespace Splintr\PhpSdk\Models\MerchantEstore;
 
+use Splintr\PhpSdk\Models\BaseApiRequest;
+use Splintr\PhpSdk\Models\Order;
 
 class CreateCheckoutRequestRequest extends BaseApiRequest
 {
