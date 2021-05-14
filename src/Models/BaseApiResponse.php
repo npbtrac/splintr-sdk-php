@@ -28,6 +28,38 @@ abstract class BaseApiResponse implements ApiResponseInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getErrorCode()
+    {
+        return $this->errorCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRawContent()
+    {
+        return $this->rawContent;
+    }
+
+    /**
      * Inherited
      *
      * @inheritDoc

@@ -3,7 +3,6 @@
 
 namespace Splintr\PhpSdk\Models;
 
-
 class Contact
 {
 

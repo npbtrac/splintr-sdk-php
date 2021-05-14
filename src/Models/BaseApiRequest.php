@@ -9,11 +9,19 @@ abstract class BaseApiRequest
 {
     use ConfigTrait;
 
+    /**
+     * BaseApiRequest constructor.
+     *
+     * @param $config
+     */
     public function __construct($config)
     {
         $this->bindConfig($config);
     }
 
+    /**
+     * @return array
+     */
     public function generateRequestParams()
     {
         $params = [];

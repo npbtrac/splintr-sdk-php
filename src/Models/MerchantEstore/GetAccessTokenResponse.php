@@ -11,16 +11,25 @@ class GetAccessTokenResponse extends BaseApiResponse
     protected $scopes;
     protected $expiresAt;
 
+    /**
+     * @return string
+     */
     public function getAccessToken()
     {
         return $this->accessToken;
     }
 
+    /**
+     * @return array
+     */
     public function getScopes()
     {
         return $this->scopes;
     }
 
+    /**
+     * @return string
+     */
     public function getExpiredAt()
     {
         return $this->expiresAt;

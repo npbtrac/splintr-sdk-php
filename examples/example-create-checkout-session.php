@@ -3,23 +3,13 @@
  * Create checkout session
  */
 
+use Splintr\PhpSdk\Core\Client;
+
 require_once 'vendor/autoload.php';
-
 /**
- * "store_secret": "9332B5CF-5937-4C4F-AEC8-FAB5BE0D7871",
- * "store_key": "865f5bafbf83f5efd97ff1922462c022",
- * "store_public_key": "9332B5CF-5B31-46A5-8B19-E2B96330FB10",
+ * @var $splintrClient Client
  */
-
-$splintrClient = new \Splintr\PhpSdk\Core\Client(
-    [
-        'baseUrl' => 'https://linked.splintr.xyz',
-        'storePublicKey' => '9332B5CF-5B31-46A5-8B19-E2B96330FB10',
-        'storeKey' => '865f5bafbf83f5efd97ff1922462c022',
-        'storeSecret' => '9332B5CF-5937-4C4F-AEC8-FAB5BE0D7871',
-        'debugMode' => true,
-    ]
-);
+$splintrClient = require_once('example-client-config.php');
 
 $orderItemCollection = new \Splintr\PhpSdk\Models\OrderItemCollection();
 $orderItemCollection->addOrderItem(new \Splintr\PhpSdk\Models\OrderItem([
@@ -90,11 +80,11 @@ $order->setCustomer(new \Splintr\PhpSdk\Models\CustomerContact([
     'email' => 'test@gmail.com',
     'phone' => '1458778965',
     'name' => 'Test Customer',
-    'address' => new \Splintr\PhpSdk\Models\Address([
+    'address' => [
         'line_1' => 'Business Bay',
         'city' => 'Dubai',
         'country' => 'AE',
-    ]),
+    ],
     'history' => new \Splintr\PhpSdk\Models\CustomerHistory([
         'gender' => 'F',
         'registered_since' => '2018-08-01',
@@ -103,21 +93,9 @@ $order->setCustomer(new \Splintr\PhpSdk\Models\CustomerContact([
         'wishlist_count' => '2',
     ]),
 ]));
-$order->setProductTypeIbp();
+$order->setProductTypePdp();
 
-//dump($order);
 $createCheckoutRequestRequest = $splintrClient->generateCreateCheckoutRequestRequest($order);
 $createCheckoutResponse = $splintrClient->createCheckoutRequest($createCheckoutRequestRequest);
-//dump($createCheckoutResponse);
-
-$getAccessTokenRequest = $splintrClient->generateGetAccessTokenRequest();
-$getAccessTokenResponse = $splintrClient->getAccessToken($getAccessTokenRequest);
-//dump($getAccessTokenResponse);
-
-$getRequestByTokenRequest = $splintrClient->generateGetRequestByTokenRequest('asdfasdfasdfasdfasdfasdfasdfasdfasdf');
-$getRequestByTokenResponse = $splintrClient->getRequestByToken($getRequestByTokenRequest);
-//dump($getRequestByTokenResponse);
-
-$getRequestByTokenRequest = $splintrClient->generateGetRequestByTokenRequest($createCheckoutResponse->getToken());
-$getRequestByTokenResponse = $splintrClient->getRequestByToken($getRequestByTokenRequest);
-//dump($getRequestByTokenResponse);
+dump($createCheckoutResponse->getToken());
+dump($createCheckoutResponse->getExpiry());

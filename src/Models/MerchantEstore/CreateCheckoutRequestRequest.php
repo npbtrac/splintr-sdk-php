@@ -12,6 +12,10 @@ class CreateCheckoutRequestRequest extends BaseApiRequest
      * @var Order
      */
     protected $order;
+
+    /**
+     * @var string
+     */
     protected $storePublicKey;
 
     /**
@@ -30,6 +34,9 @@ class CreateCheckoutRequestRequest extends BaseApiRequest
         return $this->order;
     }
 
+    /**
+     * @return array
+     */
     public function generateRequestParams()
     {
         $params = parent::generateRequestParams();

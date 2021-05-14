@@ -3,7 +3,6 @@
 
 namespace Splintr\PhpSdk\Models;
 
-
 use Splintr\PhpSdk\Traits\ConfigTrait;
 
 class Address
@@ -16,13 +15,18 @@ class Address
     protected $state;
     protected $country;
 
+    /**
+     * Address constructor.
+     *
+     * @param $config
+     */
     public function __construct($config)
     {
         $this->bindConfig($config);
     }
 
     /**
-     * Desired formant
+     * Desired format
      * Line1,
      * Line2,
      * City,
@@ -41,11 +45,51 @@ class Address
             $this->state,
             $this->country,
         ];
-        $separator = ', ' . PHP_EOL;
+        $separator = ', '.PHP_EOL;
         array_walk($address, function ($value) use (&$result, $separator) {
-            $result .= (!empty($value)) ? $value . $separator : '';
+            $result .= (!empty($value)) ? $value.$separator : '';
         });
 
         return trim($result, $separator);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLine1()
+    {
+        return $this->line1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLine2()
+    {
+        return $this->line2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

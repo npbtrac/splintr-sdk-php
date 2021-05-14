@@ -24,16 +24,27 @@ class OrderHistory
     /** @var Address */
     protected $address;
 
+    /**
+     * OrderHistory constructor.
+     *
+     * @param $config
+     */
     public function __construct($config)
     {
         $this->bindConfig($config);
     }
 
+    /**
+     * @param OrderItemCollection $orderItemCollection
+     */
     public function setItems(OrderItemCollection $orderItemCollection)
     {
         $this->items = $orderItemCollection;
     }
 
+    /**
+     * @return array
+     */
     public function generateParamsArray()
     {
         $params = $this->generateNonObjectParamsArrayFromAttributes();

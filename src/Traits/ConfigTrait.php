@@ -3,7 +3,6 @@
 
 namespace Splintr\PhpSdk\Traits;
 
-
 trait ConfigTrait
 {
     /**
@@ -13,7 +12,7 @@ trait ConfigTrait
      */
     public function bindConfig($config)
     {
-        foreach ((array)$config as $attrName => $attrValue) {
+        foreach ((array) $config as $attrName => $attrValue) {
             if (property_exists($this, $attrName)) {
                 $this->$attrName = $attrValue;
             }
@@ -25,6 +24,9 @@ trait ConfigTrait
         }
     }
 
+    /**
+     * @return array
+     */
     public function generateNonObjectParamsArrayFromAttributes()
     {
         $params = [];
@@ -59,6 +61,14 @@ trait ConfigTrait
         return $str;
     }
 
+    /**
+     * Convert CamelCase string to Snake_Eyes one
+     *
+     * @param $string
+     * @param string $us
+     *
+     * @return string
+     */
     protected function camelToSnakeEyes($string, $us = '_')
     {
         return strtolower(preg_replace(

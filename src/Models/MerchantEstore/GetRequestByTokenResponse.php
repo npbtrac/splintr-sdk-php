@@ -9,6 +9,9 @@ class GetRequestByTokenResponse extends BaseApiResponse
 {
     protected $checkout;
 
+    /**
+     * @return array
+     */
     public function getCheckout()
     {
         return $this->checkout;

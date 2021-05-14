@@ -3,11 +3,23 @@
 
 namespace Splintr\PhpSdk\Models;
 
-
 class OrderHistoryCollection
 {
     /** @var OrderHistory[] */
     protected $items;
+
+    /**
+     * OrderHistoryCollection constructor.
+     *
+     * @param array $items
+     */
+    public function __construct($items = [])
+    {
+        foreach ($items as $tmpKey => $item) {
+            $historyItem = new OrderHistory($item);
+            $this->addOrderHistory($historyItem);
+        }
+    }
 
     /**
      * @param OrderHistory $orderHistory
@@ -21,6 +33,9 @@ class OrderHistoryCollection
         $this->items[] = $orderHistory;
     }
 
+    /**
+     * @return array
+     */
     public function generateParamsArray()
     {
         $params = [];
