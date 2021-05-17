@@ -19,6 +19,11 @@ class CreateCheckoutRequestRequest extends BaseApiRequest
     protected $storePublicKey;
 
     /**
+     * @var string
+     */
+    protected $appUrl;
+
+    /**
      * @param Order $order
      */
     public function setOrder(Order $order)

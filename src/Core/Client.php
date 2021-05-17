@@ -3,16 +3,8 @@
 
 namespace Splintr\PhpSdk\Core;
 
-use Splintr\PhpSdk\Dependencies\GuzzleHttp\RequestOptions;
 use Splintr\PhpSdk\Dependencies\Psr\Http\Message\ResponseInterface;
 use Splintr\PhpSdk\Exceptions\ApiErrorException;
-use Splintr\PhpSdk\Models\MerchantEstore\CreateCheckoutRequestRequest;
-use Splintr\PhpSdk\Models\MerchantEstore\CreateCheckoutRequestResponse;
-use Splintr\PhpSdk\Models\MerchantEstore\GetAccessTokenRequest;
-use Splintr\PhpSdk\Models\MerchantEstore\GetAccessTokenResponse;
-use Splintr\PhpSdk\Models\MerchantEstore\GetRequestByTokenRequest;
-use Splintr\PhpSdk\Models\MerchantEstore\GetRequestByTokenResponse;
-use Splintr\PhpSdk\Models\Order;
 use Splintr\PhpSdk\Traits\ConfigTrait;
 use Splintr\PhpSdk\Dependencies\GuzzleHttp\Client as GuzzleHttpClient;
 
@@ -28,6 +20,7 @@ class Client
     protected $storeSecret;
     protected $debugMode = false;
     protected $apiVersion = 'v1';
+
     /**
      * Should be a Http Client object
      *

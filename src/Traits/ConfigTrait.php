@@ -35,7 +35,7 @@ trait ConfigTrait
 
         foreach ($attributes as $attributeKey => $attributeValue) {
             if (!is_object($attributeValue)) {
-                $params[$this->camelToSnakeEyes($attributeKey)] = $attributeValue;
+                $params[$this->camelCaseToSnakeEyes($attributeKey)] = $attributeValue;
             }
         }
 
@@ -69,7 +69,7 @@ trait ConfigTrait
      *
      * @return string
      */
-    protected function camelToSnakeEyes($string, $us = '_')
+    protected function camelCaseToSnakeEyes($string, $us = '_')
     {
         return strtolower(preg_replace(
             '/(?<=\d)(?=[A-Za-z])|(?<=[A-Za-z])(?=\d)|(?<=[a-z])(?=[A-Z])/',

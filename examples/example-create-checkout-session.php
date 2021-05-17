@@ -97,5 +97,5 @@ $order->setProductTypePdp();
 
 $createCheckoutRequestRequest = $splintrClient->generateCreateCheckoutRequestRequest($order);
 $createCheckoutResponse = $splintrClient->createCheckoutRequest($createCheckoutRequestRequest);
-dump($createCheckoutResponse->getToken());
-dump($createCheckoutResponse->getExpiry());
+dump($createCheckoutResponse->isSuccess());
+dump($createCheckoutResponse);

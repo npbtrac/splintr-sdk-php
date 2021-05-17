@@ -47,6 +47,8 @@ trait ClientMerchantEstoreTrait
             'order' => $order,
             'storePublicKey' => $this->storePublicKey,
             'appUrl' => $this->appUrl,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/checkout'),
+            'apiMethod' => 'post',
         ]);
     }
 
@@ -62,14 +64,7 @@ trait ClientMerchantEstoreTrait
      */
     public function createCheckoutRequest(CreateCheckoutRequestRequest $createCheckoutRequestRequest)
     {
-        /** @var Client $this */
-        $apiResponse = $this->transport->request(
-            'post',
-            $this->buildApiPath('merchant-estore/checkout'),
-            [
-                RequestOptions::FORM_PARAMS => $createCheckoutRequestRequest->generateRequestParams(),
-            ]
-        );
+        $apiResponse = $createCheckoutRequestRequest->requestApi($this->transport);
 
         /** @var CreateCheckoutRequestResponse $apiSplintrResponse */
         /** @var Client $this */
