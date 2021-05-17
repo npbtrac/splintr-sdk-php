@@ -25,7 +25,7 @@
     "coenjacobs/mozart": "~0.7.0",
     "symfony/var-dumper": "^3.0",
     "squizlabs/php_codesniffer": "3.*",
-    "phpunit/phpunit": "^9"
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "psr-4": {
@@ -54,11 +54,11 @@
     }
   },
   "scripts": {
-    "post-install-cmd": [
-      "\"vendor/bin/mozart\" compose",
-      "composer dump-autoload"
+    "unit-test": [
+      "Composer\\Config::disableProcessTimeout",
+      "\"./vendor/bin/phpunit\" --coverage-text --colors"
     ],
-    "post-update-cmd": [
+    "mozart-autoload": [
       "\"vendor/bin/mozart\" compose",
       "composer dump-autoload"
     ]

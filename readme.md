@@ -1,3 +1,19 @@
+#Development
+##Install dependencies
+```shell script
+docker-compose run --rm php-cli composer update
+```
+
+##Generate Mozart dependencies
+```shell script
+docker-compose run --rm php-cli composer mozart-autoload
+```
+
+##Running test
+```shell script
+docker-compose run --rm php-cli composer unit-test
+```
+
 # MerchantEstore
 ## Create Checkout Request
 - Before starting the checkout flow on Splintr side, you need to call this API to create a checkout request, which contains the order's details, then Splintr will return the checkout token as well as its expiry time. 

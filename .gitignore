@@ -8,6 +8,10 @@ node_modules/
 dist/
 vendor/
 
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache
+
 # Compiled Java class files
 *.class
 
