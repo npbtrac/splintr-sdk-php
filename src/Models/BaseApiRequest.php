@@ -23,6 +23,11 @@ abstract class BaseApiRequest
     protected $apiMethod;
 
     /**
+     * @var string
+     */
+    protected $apiHeaders;
+
+    /**
      * BaseApiRequest constructor.
      *
      * @param $config
@@ -63,6 +68,7 @@ abstract class BaseApiRequest
         }
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param GuzzleHttpClient $transport
      *
@@ -71,12 +77,19 @@ abstract class BaseApiRequest
      */
     public function requestApi(GuzzleHttpClient $transport)
     {
+        $options = [
+            $this->getRequestOption() => $this->generateRequestParams(),
+        ];
+        if (!empty($this->apiHeaders)) {
+            $options = array_merge($options, [
+                RequestOptions::HEADERS => $this->apiHeaders,
+            ]);
+        }
+
         return $transport->request(
             $this->getApiMethod(),
             $this->getApiEndpoint(),
-            [
-                $this->getRequestOption() => $this->generateRequestParams(),
-            ]
+            $options
         );
     }
 }

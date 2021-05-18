@@ -21,15 +21,19 @@ class ConfigTraitTest extends BasePHPUnitTestCase
     {
         $obj = $this->mainObject;
         $obj->attr1 = null;
+        $obj->attrOne = null;
 
+        /** @var ConfigTrait $obj */
         $obj->bindConfig(
             [
                 'attr1' => 'Attribute 1',
-                'attr2' => 'Attribute 2',
+                'attr_one' => 'Attribute 11',
+                'attr_two' => 'Attribute 2',
             ]
         );
 
-        $this->assertEquals($obj->attr1, 'Attribute 1', 'attr1 should have a correct value');
+        $this->assertEquals('Attribute 1', $obj->attr1, 'attr1 should have a correct value');
+        $this->assertEquals('Attribute 11', $obj->attrOne, 'attrOne should have a correct value');
         $this->assertFalse(isset($obj->attr2), 'attr2 should not be set');
     }
 
@@ -63,8 +67,8 @@ class ConfigTraitTest extends BasePHPUnitTestCase
             false
         );
         $this->assertEquals(
-            $tmpStr,
             'snakeEyesToCamelCase',
+            $tmpStr,
             'snake_eyes_to_camel_case should be transformed to snakeEyesToCamelCase'
         );
 
@@ -74,9 +78,20 @@ class ConfigTraitTest extends BasePHPUnitTestCase
             true
         );
         $this->assertEquals(
-            $tmpStr,
             'SnakeEyesToCamelCase',
+            $tmpStr,
             'snake_eyes_to_camel_case should be transformed to SnakeEyesToCamelCase'
+        );
+
+        $tmpStr = $snakeEyesToCamelCaseMethod->invoke(
+            $this->mainObject,
+            'snake_eyes_B_to_camel_case',
+            true
+        );
+        $this->assertEquals(
+            'SnakeEyesBToCamelCase',
+            $tmpStr,
+            'snake_eyes_B_to_camel_case should be transformed to SnakeEyesBToCamelCase'
         );
     }
 
@@ -93,8 +108,8 @@ class ConfigTraitTest extends BasePHPUnitTestCase
             'CamelCaseToSnakeEyes'
         );
         $this->assertEquals(
-            $tmpStr,
             'camel_case_to_snake_eyes',
+            $tmpStr,
             'CamelCaseToSnakeEyes should be transformed to camel_case_to_snake_eyes'
         );
 
@@ -103,8 +118,8 @@ class ConfigTraitTest extends BasePHPUnitTestCase
             'CamelACaseToSnakeEyes'
         );
         $this->assertEquals(
-            $tmpStr,
             'camel_acase_to_snake_eyes',
+            $tmpStr,
             'CamelCaseToSnakeEyes should be transformed to camel_case_to_snake_eyes'
         );
     }

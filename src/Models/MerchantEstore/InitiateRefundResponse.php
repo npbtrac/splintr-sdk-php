@@ -10,10 +10,11 @@ class InitiateRefundResponse extends BaseApiResponse
 {
     protected $refund;
 
+    /**
+     * @return InitiateRefund
+     */
     public function getRefund()
     {
         return new InitiateRefund($this->refund);
     }
 }
-
-

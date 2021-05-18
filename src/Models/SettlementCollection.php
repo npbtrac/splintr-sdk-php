@@ -17,14 +17,14 @@ class SettlementCollection
     {
         foreach ($items as $tmpKey => $item) {
             $settlementItem = new Settlement($item);
-            $this->adSettlementItem($settlementItem);
+            $this->addSettlementItem($settlementItem);
         }
     }
 
     /**
      * @param Settlement $settlementItem
      */
-    public function adSettlementItem(Settlement $settlementItem)
+    public function addSettlementItem(Settlement $settlementItem)
     {
         if (empty($this->items) || !is_array($this->items)) {
             $this->items = [];

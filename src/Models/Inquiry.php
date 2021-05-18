@@ -23,7 +23,15 @@ class Inquiry
      * @var CustomerContact $customer
      */
     protected $customer;
+
+    /**
+     * @var Address $address
+     */
     protected $address;
+
+    /**
+     * @var OrderItemCollection $items
+     */
     protected $items;
 
     /**
@@ -38,6 +46,9 @@ class Inquiry
         }
         if (!empty($config['address'])) {
             $config['address'] = new Address($config['address']);
+        }
+        if (!empty($config['items'])) {
+            $config['items'] = new OrderItemCollection($config['items']);
         }
         $this->bindConfig($config);
     }

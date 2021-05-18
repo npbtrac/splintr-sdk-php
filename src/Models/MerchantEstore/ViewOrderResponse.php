@@ -10,9 +10,11 @@ class ViewOrderResponse extends BaseApiResponse
 {
     protected $data;
 
+    /**
+     * @return OrderDetails
+     */
     public function getOrderDetails()
     {
-        $this->data = new OrderDetails($this->getData());
-        return $this->data;
+        return new OrderDetails($this->data);
     }
 }

@@ -10,9 +10,11 @@ class ViewInquiryListResponse extends BaseApiResponse
 {
     protected $data;
 
+    /**
+     * @return InquiryCollection
+     */
     public function getInquiryList()
     {
-        $this->data = new InquiryCollection($this->getData());
-        return $this->data;
+        return new InquiryCollection($this->data);
     }
 }

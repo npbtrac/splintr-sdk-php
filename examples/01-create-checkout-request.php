@@ -98,4 +98,4 @@ $order->setProductTypePdp();
 $createCheckoutRequestRequest = $splintrClient->generateCreateCheckoutRequestRequest($order);
 $createCheckoutResponse = $splintrClient->createCheckoutRequest($createCheckoutRequestRequest);
 dump($createCheckoutResponse->isSuccess());
-dump($createCheckoutResponse);
+dump($createCheckoutResponse->getCheckoutUrl());
