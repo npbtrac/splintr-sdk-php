@@ -9,7 +9,6 @@ class CreateCheckoutRequestResponse extends BaseApiResponse
 {
     protected $token;
     protected $expiry;
-    protected $checkoutEndpointUrl = 'https://react.splintr.xyz/checkout-process/';
 
     /**
      * @return string
@@ -32,6 +31,6 @@ class CreateCheckoutRequestResponse extends BaseApiResponse
      */
     public function getCheckoutUrl()
     {
-        return $this->checkoutEndpointUrl . $this->token;
+        return 'https://react.splintr.xyz/checkout-process/' . $this->token;
     }
 }

@@ -14,7 +14,6 @@ class Client
     use ClientMerchantEstoreTrait;
 
     protected $baseUrl;
-    protected $appUrl;
     protected $storeKey;
     protected $storePublicKey;
     protected $storeSecret;
@@ -48,16 +47,6 @@ class Client
     public function getBaseUrl()
     {
         return $this->baseUrl;
-    }
-
-    /**
-     * Get App URL for checkout
-     *
-     * @return mixed
-     */
-    public function getAppUrl()
-    {
-        return $this->appUrl;
     }
 
     /**
