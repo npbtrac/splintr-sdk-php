@@ -3,10 +3,10 @@
 
 namespace Splintr\PhpSdk\Core;
 
-use Splintr\PhpSdk\Dependencies\Psr\Http\Message\ResponseInterface;
+use Splintr\PhpSdkLib\Psr\Http\Message\ResponseInterface;
+use Splintr\PhpSdkLib\GuzzleHttp\Client as GuzzleHttpClient;
 use Splintr\PhpSdk\Exceptions\ApiErrorException;
 use Splintr\PhpSdk\Traits\ConfigTrait;
-use Splintr\PhpSdk\Dependencies\GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client
 {

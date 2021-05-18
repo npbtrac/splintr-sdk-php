@@ -3,10 +3,10 @@
 
 namespace Splintr\PhpSdk\Models;
 
-use Splintr\PhpSdk\Dependencies\Psr\Http\Message\ResponseInterface;
-use Splintr\PhpSdk\Dependencies\GuzzleHttp\RequestOptions;
+use Splintr\PhpSdkLib\Psr\Http\Message\ResponseInterface;
+use Splintr\PhpSdkLib\GuzzleHttp\RequestOptions;
 use Splintr\PhpSdk\Traits\ConfigTrait;
-use Splintr\PhpSdk\Dependencies\GuzzleHttp\Client as GuzzleHttpClient;
+use Splintr\PhpSdkLib\GuzzleHttp\Client as GuzzleHttpClient;
 
 abstract class BaseApiRequest
 {
@@ -73,7 +73,7 @@ abstract class BaseApiRequest
      * @param GuzzleHttpClient $transport
      *
      * @return ResponseInterface
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function requestApi(GuzzleHttpClient $transport)
     {

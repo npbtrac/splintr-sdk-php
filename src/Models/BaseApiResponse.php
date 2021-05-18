@@ -4,7 +4,7 @@
 namespace Splintr\PhpSdk\Models;
 
 use Splintr\PhpSdk\Core\ApiResponseInterface;
-use Splintr\PhpSdk\Dependencies\Psr\Http\Message\StreamInterface;
+use Splintr\PhpSdkLib\Psr\Http\Message\StreamInterface;
 use Splintr\PhpSdk\Traits\ConfigTrait;
 
 abstract class BaseApiResponse implements ApiResponseInterface

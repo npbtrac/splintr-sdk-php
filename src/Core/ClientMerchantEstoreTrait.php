@@ -58,7 +58,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return CreateCheckoutRequestResponse
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function createCheckoutRequest(CreateCheckoutRequestRequest $createCheckoutRequestRequest)
     {
@@ -91,7 +91,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return GetAccessTokenResponse
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function getAccessToken(GetAccessTokenRequest $getAccessTokenRequest)
     {
@@ -125,7 +125,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return GetRequestByTokenResponse
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function getRequestByToken(GetRequestByTokenRequest $getRequestByTokenRequest)
     {
@@ -147,7 +147,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ViewInquiryListRequest
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewInquiryListRequest($startDate, $endDate, $size, $from)
     {
@@ -169,7 +169,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ApiResponseInterface|ViewInquiryListResponse|null
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function viewInquiryList(ViewInquiryListRequest $generateViewInquiryListRequest)
     {
@@ -188,7 +188,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ViewInquiryRequest
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewInquiryRequest($inquiryId)
     {
@@ -207,7 +207,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ApiResponseInterface|ViewInquiryResponse|null
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function viewInquiry(ViewInquiryRequest $generateViewInquiryRequest)
     {
@@ -230,7 +230,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ViewOrderListRequest
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewOrderListRequest($startDate, $endDate, $size, $from, $status)
     {
@@ -253,7 +253,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ApiResponseInterface|ViewInquiryListResponse|null
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function viewOrderList(ViewOrderListRequest $generateViewOrderListRequest)
     {
@@ -272,7 +272,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ViewOrderRequest
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewOrderRequest($orderId)
     {
@@ -291,7 +291,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ApiResponseInterface|ViewOrderResponse|null
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function viewOrder(ViewOrderRequest $generateViewOrderRequest)
     {
@@ -313,7 +313,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ViewRefundsListRequest
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewRefundsListRequest($startDate, $endDate, $size, $from)
     {
@@ -335,7 +335,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ApiResponseInterface|ViewRefundsListResponse|null
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function viewRefundsList(ViewRefundsListRequest $generateViewRefundsListRequest)
     {
@@ -357,7 +357,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ViewSettlementsListRequest
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewSettlementsListRequest($startDate, $endDate, $size, $from)
     {
@@ -379,7 +379,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return ApiResponseInterface|ViewRefundsListResponse|null
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function viewSettlementsList(ViewSettlementsListRequest $generateViewSettlementsListRequest)
     {
@@ -399,7 +399,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return InitiateRefundRequest
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function generateInitiateRefundRequest($orderId, $amount, $reason)
     {
@@ -422,7 +422,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return InitiateRefundResponse
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     public function initiateRefund(InitiateRefundRequest $generateInitiateRefundRequest)
     {
@@ -441,7 +441,7 @@ trait ClientMerchantEstoreTrait
      *
      * @return string[]
      * @throws ApiErrorException
-     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
     protected function generateAuthHeader()
     {

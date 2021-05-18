@@ -29,12 +29,13 @@
   },
   "autoload": {
     "psr-4": {
-      "Splintr\\PhpSdk\\": "src/"
+      "Splintr\\PhpSdk\\": "src/",
+      "Splintr\\PhpSdkLib\\": "lib/"
     },
     "files": [
-      "src/Dependencies/GuzzleHttp/functions_include.php",
-      "src/Dependencies/GuzzleHttp/Promise/functions_include.php",
-      "src/Dependencies/GuzzleHttp/Psr7/functions_include.php"
+      "lib/GuzzleHttp/functions_include.php",
+      "lib/GuzzleHttp/Promise/functions_include.php",
+      "lib/GuzzleHttp/Psr7/functions_include.php"
     ]
   },
   "autoload-dev": {
@@ -44,9 +45,9 @@
   },
   "extra": {
     "mozart": {
-      "dep_namespace": "Splintr\\PhpSdk\\Dependencies\\",
-      "dep_directory": "/src/Dependencies/",
-      "classmap_directory": "/classes/dependencies/",
+      "dep_namespace": "Splintr\\PhpSdkLib\\",
+      "dep_directory": "/lib/",
+      "classmap_directory": "/lib/__classes/",
       "classmap_prefix": "SplintrPhpSdk_",
       "packages": [
         "guzzlehttp/guzzle"

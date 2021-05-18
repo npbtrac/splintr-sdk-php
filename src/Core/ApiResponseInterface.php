@@ -3,7 +3,7 @@
 
 namespace Splintr\PhpSdk\Core;
 
-use Splintr\PhpSdk\Dependencies\Psr\Http\Message\StreamInterface;
+use Splintr\PhpSdkLib\Psr\Http\Message\StreamInterface;
 
 interface ApiResponseInterface
 {
