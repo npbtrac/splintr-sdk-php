@@ -2,7 +2,6 @@
 
 namespace Splintr\PhpSdk\Core;
 
-use Splintr\PhpSdk\Dependencies\GuzzleHttp\RequestOptions;
 use Splintr\PhpSdk\Exceptions\ApiErrorException;
 use Splintr\PhpSdk\Models\MerchantEstore\CreateCheckoutRequestRequest;
 use Splintr\PhpSdk\Models\MerchantEstore\CreateCheckoutRequestResponse;
@@ -82,6 +81,8 @@ trait ClientMerchantEstoreTrait
         return new GetAccessTokenRequest([
             'storeKey' => $this->storeKey,
             'storeSecret' => $this->storeSecret,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/get-access-token'),
+            'apiMethod' => 'post',
         ]);
     }
 
@@ -95,14 +96,7 @@ trait ClientMerchantEstoreTrait
      */
     public function getAccessToken(GetAccessTokenRequest $getAccessTokenRequest)
     {
-        /** @var Client $this */
-        $apiResponse = $this->transport->request(
-            'post',
-            $this->buildApiPath('merchant-estore/get-access-token'),
-            [
-                RequestOptions::FORM_PARAMS => $getAccessTokenRequest->generateRequestParams(),
-            ]
-        );
+        $apiResponse = $getAccessTokenRequest->requestApi($this->transport);
 
         /** @var GetAccessTokenResponse $apiSplintrResponse */
         /** @var Client $this */
@@ -121,6 +115,8 @@ trait ClientMerchantEstoreTrait
         /** @var Client $this */
         return new GetRequestByTokenRequest([
             'checkoutToken' => $checkoutToken,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/checkout'),
+            'apiMethod' => 'get',
         ]);
     }
 
@@ -134,14 +130,7 @@ trait ClientMerchantEstoreTrait
      */
     public function getRequestByToken(GetRequestByTokenRequest $getRequestByTokenRequest)
     {
-        /** @var Client $this */
-        $apiResponse = $this->transport->request(
-            'get',
-            $this->buildApiPath('merchant-estore/checkout'),
-            [
-                RequestOptions::QUERY => $getRequestByTokenRequest->generateRequestParams(),
-            ]
-        );
+        $apiResponse = $getRequestByTokenRequest->requestApi($this->transport);
 
         /** @var GetRequestByTokenResponse $apiSplintrResponse */
         /** @var Client $this */
@@ -150,6 +139,7 @@ trait ClientMerchantEstoreTrait
         return $apiSplintrResponse;
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param $startDate
      * @param $endDate
@@ -157,6 +147,8 @@ trait ClientMerchantEstoreTrait
      * @param $from
      *
      * @return ViewInquiryListRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewInquiryListRequest($startDate, $endDate, $size, $from)
     {
@@ -166,6 +158,9 @@ trait ClientMerchantEstoreTrait
             'endDate' => $endDate,
             'size' => $size,
             'from' => $from,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/inquiry-list/view'),
+            'apiMethod' => 'get',
+            'apiHeaders' => $this->generateAuthHeader(),
         ]);
     }
 
@@ -179,41 +174,31 @@ trait ClientMerchantEstoreTrait
      */
     public function viewInquiryList(ViewInquiryListRequest $generateViewInquiryListRequest)
     {
-        $getAccessTokenRequest = $this->generateGetAccessTokenRequest();
-        $getAccessTokenResponse = $this->getAccessToken($getAccessTokenRequest);
-        if (!empty($getAccessTokenResponse->getAccessToken())) {
-            $accessToken = $getAccessTokenResponse->getAccessToken();
-            /** @var Client $this */
-            $apiResponse = $this->transport->request(
-                'get',
-                $this->buildApiPath('merchant-estore/inquiry-list/view'),
-                [
-                    RequestOptions::QUERY => $generateViewInquiryListRequest->generateRequestParams(),
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Bearer '.$accessToken,
-                    ],
-                ]
-            );
-            /** @var ViewInquiryListResponse $apiSplintrResponse */
-            /** @var Client $this */
-            $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewInquiryListResponse::class);
+        $apiResponse = $generateViewInquiryListRequest->requestApi($this->transport);
 
-            return $apiSplintrResponse;
-        } else {
-            return null;
-        }
+        /** @var ViewInquiryListResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewInquiryListResponse::class);
+
+        return $apiSplintrResponse;
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param $inquiryId
      *
      * @return ViewInquiryRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewInquiryRequest($inquiryId)
     {
         /** @var Client $this */
         return new ViewInquiryRequest([
             'inquiryId' => $inquiryId,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/inquiry/view'),
+            'apiMethod' => 'get',
+            'apiHeaders' => $this->generateAuthHeader(),
         ]);
     }
 
@@ -227,31 +212,16 @@ trait ClientMerchantEstoreTrait
      */
     public function viewInquiry(ViewInquiryRequest $generateViewInquiryRequest)
     {
-        $getAccessTokenRequest = $this->generateGetAccessTokenRequest();
-        $getAccessTokenResponse = $this->getAccessToken($getAccessTokenRequest);
-        if (!empty($getAccessTokenResponse->getAccessToken())) {
-            $accessToken = $getAccessTokenResponse->getAccessToken();
-            /** @var Client $this */
-            $apiResponse = $this->transport->request(
-                'get',
-                $this->buildApiPath('merchant-estore/inquiry/view'),
-                [
-                    RequestOptions::QUERY => $generateViewInquiryRequest->generateRequestParams(),
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Bearer '.$accessToken,
-                    ],
-                ]
-            );
-            /** @var ViewInquiryResponse $apiSplintrResponse */
-            /** @var Client $this */
-            $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewInquiryResponse::class);
+        $apiResponse = $generateViewInquiryRequest->requestApi($this->transport);
 
-            return $apiSplintrResponse;
-        } else {
-            return null;
-        }
+        /** @var ViewInquiryResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewInquiryResponse::class);
+
+        return $apiSplintrResponse;
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param $startDate
      * @param $endDate
@@ -260,6 +230,8 @@ trait ClientMerchantEstoreTrait
      * @param $status
      *
      * @return ViewOrderListRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewOrderListRequest($startDate, $endDate, $size, $from, $status)
     {
@@ -270,6 +242,9 @@ trait ClientMerchantEstoreTrait
             'size' => $size,
             'from' => $from,
             'status' => $status,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/order-list/view'),
+            'apiMethod' => 'get',
+            'apiHeaders' => $this->generateAuthHeader(),
         ]);
     }
 
@@ -283,41 +258,31 @@ trait ClientMerchantEstoreTrait
      */
     public function viewOrderList(ViewOrderListRequest $generateViewOrderListRequest)
     {
-        $getAccessTokenRequest = $this->generateGetAccessTokenRequest();
-        $getAccessTokenResponse = $this->getAccessToken($getAccessTokenRequest);
-        if (!empty($getAccessTokenResponse->getAccessToken())) {
-            $accessToken = $getAccessTokenResponse->getAccessToken();
-            /** @var Client $this */
-            $apiResponse = $this->transport->request(
-                'get',
-                $this->buildApiPath('merchant-estore/order-list/view'),
-                [
-                    RequestOptions::QUERY => $generateViewOrderListRequest->generateRequestParams(),
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Bearer '.$accessToken,
-                    ],
-                ]
-            );
-            /** @var ViewOrderListResponse $apiSplintrResponse */
-            /** @var Client $this */
-            $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewOrderListResponse::class);
+        $apiResponse = $generateViewOrderListRequest->requestApi($this->transport);
 
-            return $apiSplintrResponse;
-        } else {
-            return null;
-        }
+        /** @var ViewOrderListResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewOrderListResponse::class);
+
+        return $apiSplintrResponse;
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param $orderId
      *
      * @return ViewOrderRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewOrderRequest($orderId)
     {
         /** @var Client $this */
         return new ViewOrderRequest([
             'orderId' => $orderId,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/order/view'),
+            'apiMethod' => 'get',
+            'apiHeaders' => $this->generateAuthHeader(),
         ]);
     }
 
@@ -331,31 +296,16 @@ trait ClientMerchantEstoreTrait
      */
     public function viewOrder(ViewOrderRequest $generateViewOrderRequest)
     {
-        $getAccessTokenRequest = $this->generateGetAccessTokenRequest();
-        $getAccessTokenResponse = $this->getAccessToken($getAccessTokenRequest);
-        if (!empty($getAccessTokenResponse->getAccessToken())) {
-            $accessToken = $getAccessTokenResponse->getAccessToken();
-            /** @var Client $this */
-            $apiResponse = $this->transport->request(
-                'get',
-                $this->buildApiPath('merchant-estore/order/view'),
-                [
-                    RequestOptions::QUERY => $generateViewOrderRequest->generateRequestParams(),
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Bearer '.$accessToken,
-                    ],
-                ]
-            );
-            /** @var ViewOrderResponse $apiSplintrResponse */
-            /** @var Client $this */
-            $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewOrderResponse::class);
+        $apiResponse = $generateViewOrderRequest->requestApi($this->transport);
 
-            return $apiSplintrResponse;
-        } else {
-            return null;
-        }
+        /** @var ViewOrderResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewOrderResponse::class);
+
+        return $apiSplintrResponse;
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param $startDate
      * @param $endDate
@@ -363,6 +313,8 @@ trait ClientMerchantEstoreTrait
      * @param $from
      *
      * @return ViewRefundsListRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewRefundsListRequest($startDate, $endDate, $size, $from)
     {
@@ -372,6 +324,9 @@ trait ClientMerchantEstoreTrait
             'endDate' => $endDate,
             'size' => $size,
             'from' => $from,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/refunds-list/view'),
+            'apiMethod' => 'get',
+            'apiHeaders' => $this->generateAuthHeader(),
         ]);
     }
 
@@ -385,31 +340,16 @@ trait ClientMerchantEstoreTrait
      */
     public function viewRefundsList(ViewRefundsListRequest $generateViewRefundsListRequest)
     {
-        $getAccessTokenRequest = $this->generateGetAccessTokenRequest();
-        $getAccessTokenResponse = $this->getAccessToken($getAccessTokenRequest);
-        if (!empty($getAccessTokenResponse->getAccessToken())) {
-            $accessToken = $getAccessTokenResponse->getAccessToken();
-            /** @var Client $this */
-            $apiResponse = $this->transport->request(
-                'get',
-                $this->buildApiPath('merchant-estore/refunds-list/view'),
-                [
-                    RequestOptions::QUERY => $generateViewRefundsListRequest->generateRequestParams(),
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Bearer '.$accessToken,
-                    ],
-                ]
-            );
-            /** @var ViewRefundsListResponse $apiSplintrResponse */
-            /** @var Client $this */
-            $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewRefundsListResponse::class);
+        $apiResponse = $generateViewRefundsListRequest->requestApi($this->transport);
 
-            return $apiSplintrResponse;
-        } else {
-            return null;
-        }
+        /** @var ViewRefundsListResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewRefundsListResponse::class);
+
+        return $apiSplintrResponse;
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param $startDate
      * @param $endDate
@@ -417,6 +357,8 @@ trait ClientMerchantEstoreTrait
      * @param $from
      *
      * @return ViewSettlementsListRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
      */
     public function generateViewSettlementsListRequest($startDate, $endDate, $size, $from)
     {
@@ -426,6 +368,9 @@ trait ClientMerchantEstoreTrait
             'endDate' => $endDate,
             'size' => $size,
             'from' => $from,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/settlements-list/view'),
+            'apiMethod' => 'get',
+            'apiHeaders' => $this->generateAuthHeader(),
         ]);
     }
 
@@ -439,37 +384,23 @@ trait ClientMerchantEstoreTrait
      */
     public function viewSettlementsList(ViewSettlementsListRequest $generateViewSettlementsListRequest)
     {
-        $getAccessTokenRequest = $this->generateGetAccessTokenRequest();
-        $getAccessTokenResponse = $this->getAccessToken($getAccessTokenRequest);
-        if (!empty($getAccessTokenResponse->getAccessToken())) {
-            $accessToken = $getAccessTokenResponse->getAccessToken();
-            /** @var Client $this */
-            $apiResponse = $this->transport->request(
-                'get',
-                $this->buildApiPath('merchant-estore/settlements-list/view'),
-                [
-                    RequestOptions::QUERY => $generateViewSettlementsListRequest->generateRequestParams(),
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Bearer '.$accessToken,
-                    ],
-                ]
-            );
-            /** @var ViewSettlementsListResponse $apiSplintrResponse */
-            /** @var Client $this */
-            $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewSettlementsListResponse::class);
+        $apiResponse = $generateViewSettlementsListRequest->requestApi($this->transport);
+        /** @var ViewSettlementsListResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewSettlementsListResponse::class);
 
-            return $apiSplintrResponse;
-        } else {
-            return null;
-        }
+        return $apiSplintrResponse;
     }
 
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     /**
      * @param $orderId
      * @param $amount
      * @param $reason
      *
      * @return InitiateRefundRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
      */
     public function generateInitiateRefundRequest($orderId, $amount, $reason)
     {
@@ -478,6 +409,9 @@ trait ClientMerchantEstoreTrait
             'orderId' => $orderId,
             'amount' => $amount,
             'reason' => $reason,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/refund/initiate'),
+            'apiMethod' => 'post',
+            'apiHeaders' => $this->generateAuthHeader(),
         ]);
     }
 
@@ -493,29 +427,29 @@ trait ClientMerchantEstoreTrait
      */
     public function initiateRefund(InitiateRefundRequest $generateInitiateRefundRequest)
     {
-        $getAccessTokenRequest = $this->generateGetAccessTokenRequest();
-        $getAccessTokenResponse = $this->getAccessToken($getAccessTokenRequest);
-        if (!empty($getAccessTokenResponse->getAccessToken())) {
-            $accessToken = $getAccessTokenResponse->getAccessToken();
-            /** @var Client $this */
-            $apiResponse = $this->transport->request(
-                'post',
-                $this->buildApiPath('merchant-estore/refund/initiate'),
-                [
-                    RequestOptions::FORM_PARAMS => $generateInitiateRefundRequest->generateRequestParams(),
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Bearer '.$accessToken,
-                    ],
-                ]
-            );
+        $apiResponse = $generateInitiateRefundRequest->requestApi($this->transport);
 
-            /** @var InitiateRefundResponse $apiSplintrResponse */
-            /** @var Client $this */
-            $apiSplintrResponse = $this->generateApiResponse($apiResponse, InitiateRefundResponse::class);
+        /** @var InitiateRefundResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, InitiateRefundResponse::class);
 
-            return $apiSplintrResponse;
-        } else {
-            return null;
-        }
+        return $apiSplintrResponse;
+    }
+
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
+    /**
+     * Generate the Bearer Authorization for header
+     *
+     * @return string[]
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdk\Dependencies\GuzzleHttp\Exception\GuzzleException
+     */
+    protected function generateAuthHeader()
+    {
+        return [
+            'Authorization' => 'Bearer '.$this->getAccessToken(
+                $this->generateGetAccessTokenRequest()
+            )->getAccessToken(),
+        ];
     }
 }

@@ -4,7 +4,7 @@ $splintrClient = require_once('example-client-config.php');
 
 $getAccessTokenRequest = $splintrClient->generateGetAccessTokenRequest();
 $getAccessTokenResponse = $splintrClient->getAccessToken($getAccessTokenRequest);
+dump($getAccessTokenResponse->isSuccess());
 dump($getAccessTokenResponse);
-dump($getAccessTokenResponse->getAccessToken());
-dump($getAccessTokenResponse->getScopes());
-dump($getAccessTokenResponse->getExpiredAt());
+
+dump($getAccessTokenRequest->getApiEndpoint());

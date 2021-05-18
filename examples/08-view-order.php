@@ -6,3 +6,4 @@ $viewViewOrderRequest = $splintrClient->generateViewOrderRequest('SPR-1000-2981'
 $viewOrderResponse = $splintrClient->viewOrder($viewViewOrderRequest);
 dump($viewOrderResponse->getOrderDetails());
 dump($viewOrderResponse->getOrderDetails()->getOrderId());
+dump($viewOrderResponse->getOrderDetails()->getReferenceId());

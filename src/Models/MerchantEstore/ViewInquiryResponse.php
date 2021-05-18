@@ -8,14 +8,13 @@ use Splintr\PhpSdk\Models\Inquiry;
 
 class ViewInquiryResponse extends BaseApiResponse
 {
-    protected $inquiry = null;
+    protected $data;
 
+    /**
+     * @return Inquiry
+     */
     public function getInquiry()
     {
-        if (empty($this->inquiry)) {
-            $this->inquiry = new Inquiry($this->getData());
-        }
-
-        return $this->inquiry;
+        return new Inquiry($this->data);
     }
 }

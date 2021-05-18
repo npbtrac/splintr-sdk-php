@@ -3,14 +3,13 @@
 
 namespace Splintr\PhpSdk\Models\MerchantEstore;
 
-use Splintr\PhpSdk\Dependencies\Psr\Http\Message\StreamInterface;
 use Splintr\PhpSdk\Models\BaseApiResponse;
 
 class CreateCheckoutRequestResponse extends BaseApiResponse
 {
     protected $token;
     protected $expiry;
-    protected $checkoutUrl;
+    protected $checkoutEndpointUrl = 'https://react.splintr.xyz/checkout-process/';
 
     /**
      * @return string
@@ -33,6 +32,6 @@ class CreateCheckoutRequestResponse extends BaseApiResponse
      */
     public function getCheckoutUrl()
     {
-        return $this->checkoutUrl;
+        return $this->checkoutEndpointUrl . $this->token;
     }
 }
