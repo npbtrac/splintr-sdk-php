@@ -9,9 +9,6 @@ class Order
 {
     use ConfigTrait;
 
-    const PRODUCT_TYPE_IBP = 'ibp';
-    const PRODUCT_TYPE_PDP = 'pdp';
-
     protected $productType;
     protected $referenceId;
     protected $currency;
@@ -51,11 +48,27 @@ class Order
     }
 
     /**
+     * @return OrderItemCollection
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
      * @param OrderHistoryCollection $orderHistoryCollection
      */
     public function setOrdersHistory(OrderHistoryCollection $orderHistoryCollection)
     {
         $this->ordersHistory = $orderHistoryCollection;
+    }
+
+    /**
+     * @return OrderHistoryCollection
+     */
+    public function getOrdersHistory()
+    {
+        return $this->ordersHistory;
     }
 
     /**
@@ -67,19 +80,29 @@ class Order
     }
 
     /**
-     * Set a product type to the checkout request
+     * @return CustomerContact
      */
-    public function setProductTypeIbp()
+    public function getCustomer()
     {
-        $this->productType = static::PRODUCT_TYPE_IBP;
+        return $this->customer;
     }
 
     /**
      * Set a product type to the checkout request
+     *
+     * @param $productType
      */
-    public function setProductTypePdp()
+    public function setProductType($productType)
     {
-        $this->productType = static::PRODUCT_TYPE_PDP;
+        $this->productType = $productType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductType()
+    {
+        return $this->productType;
     }
 
     /**

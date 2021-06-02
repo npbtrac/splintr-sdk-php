@@ -9,6 +9,13 @@ class Address
 {
     use ConfigTrait;
 
+    const
+        LINE1 = 'line1',
+        LINE2 = 'line2',
+        STATE = 'state',
+        CITY = 'city',
+        COUNTRY = 'country';
+
     protected $line1;
     protected $line2;
     protected $city;
@@ -91,5 +98,19 @@ class Address
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            self::LINE1 => $this->getLine1(),
+            self::LINE2 => $this->getLine2(),
+            self::STATE => $this->getState(),
+            self::CITY => $this->getCity(),
+            self::COUNTRY => $this->getCountry(),
+        ];
     }
 }

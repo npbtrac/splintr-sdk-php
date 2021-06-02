@@ -12,6 +12,7 @@ class Client
 {
     use ConfigTrait;
     use ClientMerchantEstoreTrait;
+    use ClientAfterCheckoutTrait;
 
     protected $baseUrl;
     protected $storeKey;
@@ -32,7 +33,7 @@ class Client
      *
      * @param $config
      */
-    public function __construct($config)
+    public function __construct($config = [])
     {
         $this->bindConfig($config);
 
@@ -40,7 +41,7 @@ class Client
     }
 
     /**
-     * Get Base URL of API
+     * Get Base URL of API`
      *
      * @return mixed
      */
