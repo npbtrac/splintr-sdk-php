@@ -45,6 +45,7 @@ trait ClientMerchantEstoreTrait
         return new CreateCheckoutRequestRequest([
             'order' => $order,
             'storePublicKey' => $this->storePublicKey,
+            'appUrl' => $this->getAppUrl(),
             'apiEndpoint' => $this->buildApiPath('merchant-estore/checkout'),
             'apiMethod' => 'post',
         ]);
@@ -67,6 +68,7 @@ trait ClientMerchantEstoreTrait
         /** @var CreateCheckoutRequestResponse $apiSplintrResponse */
         /** @var Client $this */
         $apiSplintrResponse = $this->generateApiResponse($apiResponse, CreateCheckoutRequestResponse::class);
+        $apiSplintrResponse->setAppUrl($this->getAppUrl());
 
         return $apiSplintrResponse;
     }

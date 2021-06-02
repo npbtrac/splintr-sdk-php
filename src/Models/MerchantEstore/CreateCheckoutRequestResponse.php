@@ -10,6 +10,18 @@ class CreateCheckoutRequestResponse extends BaseApiResponse
     protected $token;
     protected $expiry;
 
+    protected $appUrl;
+
+    /**
+     * @param string $appUrl
+     *
+     * @return void
+     */
+    public function setAppUrl($appUrl)
+    {
+        $this->appUrl = trim(trim($appUrl), '\/');
+    }
+
     /**
      * @return string
      */
@@ -29,8 +41,20 @@ class CreateCheckoutRequestResponse extends BaseApiResponse
     /**
      * @return string
      */
+    public function getAppUrl()
+    {
+        return $this->appUrl;
+    }
+
+    /**
+     * @return string
+     */
     public function getCheckoutUrl()
     {
-        return 'https://react.splintr.xyz/checkout-process/' . $this->token;
+        if ($this->getToken() && $this->appUrl) {
+            return $this->appUrl.'/checkout-process/'.$this->getToken();
+        }
+
+        return null;
     }
 }

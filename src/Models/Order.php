@@ -9,6 +9,9 @@ class Order
 {
     use ConfigTrait;
 
+    const PRODUCT_TYPE_IBP = 'ibp';
+    const PRODUCT_TYPE_PDP = 'pdp';
+
     protected $productType;
     protected $referenceId;
     protected $currency;
@@ -103,6 +106,30 @@ class Order
     public function getProductType()
     {
         return $this->productType;
+    }
+
+    /**
+     * Set a product type to the checkout request
+     */
+    public function setProductTypePdp()
+    {
+        $this->productType = static::PRODUCT_TYPE_PDP;
+    }
+
+    /**
+     * Set a product type to Pay by Instalments
+     */
+    public function setProductTypeIbp()
+    {
+        $this->productType = static::PRODUCT_TYPE_IBP;
+    }
+
+    /**
+     * Set a product type to Pay Later
+     */
+    public function setProductTypePbp()
+    {
+        $this->productType = static::PRODUCT_TYPE_PDP;
     }
 
     /**

@@ -14,6 +14,9 @@ class Client
     use ClientMerchantEstoreTrait;
     use ClientAfterCheckoutTrait;
 
+    const PROD_APP_URL = 'https://app.splintr.com';
+
+    protected $appUrl;
     protected $baseUrl;
     protected $storeKey;
     protected $storePublicKey;
@@ -28,6 +31,12 @@ class Client
      */
     protected $transport = null;
 
+    protected $urlMappingApiApp = [
+        'https://linked.splintr.xyz' => 'https://react.splintr.xyz',
+        'https://qa-api.splintrit.com' => 'https://qa-app.splintr.com',
+        'https://sandbox-api.splintrit.com' => 'https://sandbox.splintr.com',
+    ];
+
     /**
      * Client constructor.
      *
@@ -36,18 +45,29 @@ class Client
     public function __construct($config = [])
     {
         $this->bindConfig($config);
+        $this->appUrl = $this->buildAppUrl();
 
         $this->prepareTransport();
     }
 
     /**
-     * Get Base URL of API`
+     * Get Base URL of API
      *
      * @return mixed
      */
     public function getBaseUrl()
     {
         return $this->baseUrl;
+    }
+
+    /**
+     * Get App URL
+     *
+     * @return mixed
+     */
+    public function getAppUrl()
+    {
+        return $this->appUrl;
     }
 
     /**
@@ -103,5 +123,18 @@ class Client
     protected function isSuccessfulStatusCode($statusCode)
     {
         return 200 === (int) $statusCode;
+    }
+
+    /**
+     * Build App URL from API URL using a mapping array
+     *
+     * @return string
+     */
+    protected function buildAppUrl()
+    {
+        $apiUrl = trim($this->baseUrl);
+        return isset($this->urlMappingApiApp[$apiUrl])
+            ? $this->urlMappingApiApp[$apiUrl]
+            : static::PROD_APP_URL;
     }
 }
