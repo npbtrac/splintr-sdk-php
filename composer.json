@@ -13,7 +13,11 @@
   "authors": [
     {
       "name": "Splintr Team",
-      "email": "tech@tamara.co"
+      "email": "dev@splintr.com"
+    },
+    {
+      "name": "Trac Nguyen",
+      "email": "npbtrac@yahoo.com"
     }
   ],
   "require": {
@@ -22,6 +26,7 @@
     "guzzlehttp/guzzle": "6.5.5"
   },
   "require-dev": {
+    "vlucas/phpdotenv": "^4.2.0",
     "coenjacobs/mozart": "~0.7.0",
     "symfony/var-dumper": "^3.0",
     "squizlabs/php_codesniffer": "3.*",
