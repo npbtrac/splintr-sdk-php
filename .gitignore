@@ -3,10 +3,11 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+.env
+vendor/
+
 # Node artifact files
 node_modules/
-dist/
-vendor/
 
 # PHPUnit
 .phpunit.result.cache
