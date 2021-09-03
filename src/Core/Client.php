@@ -33,7 +33,7 @@ class Client
 
     protected $urlMappingApiApp = [
         'https://linked.splintr.xyz' => 'https://react.splintr.xyz',
-        'https://qa-api.splintr.com' => 'https://qa-app.splintr.com',
+        'https://qa-api.splintrit.com' => 'https://checkout.splintrit.com',
         'https://sandbox-api.splintr.com' => 'https://sandbox.splintr.com',
         'https://api.splintr.com' => 'https://app.splintr.com',
     ];
