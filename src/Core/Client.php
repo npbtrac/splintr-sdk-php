@@ -14,7 +14,7 @@ class Client
     use ClientMerchantEstoreTrait;
     use ClientAfterCheckoutTrait;
 
-    const PROD_APP_URL = 'http://localhost:3000'; // Prod url 'https://checkout.splintr.com'
+    const PROD_APP_URL = 'http://4dc0-168-138-166-53.ngrok.io'; // Prod url 'https://checkout.splintr.com'
 
     protected $appUrl;
     protected $baseUrl;
@@ -33,7 +33,7 @@ class Client
 
     protected $urlMappingApiApp = [
         'https://api.splintr.com' => 'https://checkout.splintr.com',
-        'http://splintr-com-api.local' => 'http://localhost:3000', // This is for local testing env
+        'http://splintr-com-api.local' => 'http://4dc0-168-138-166-53.ngrok.io', // This is for local testing env
     ];
 
     /**
