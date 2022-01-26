@@ -52,7 +52,7 @@ class CreateCheckoutRequestResponse extends BaseApiResponse
     public function getCheckoutUrl()
     {
         if ($this->getToken() && $this->appUrl) {
-            return $this->appUrl.'/checkout-process/'.$this->getToken();
+            return $this->appUrl.'/?token='.$this->getToken();
         }
 
         return null;

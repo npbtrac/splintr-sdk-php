@@ -24,10 +24,10 @@ $createCheckoutResponse = $splintrClient->createCheckoutRequest($createCheckoutR
 ```
 - The token returned from Create Checkout Response then will be used to redirect customer to the Splintr hosted checkout page afterwards with the url:
 ```
-https://react.splintr.xyz/checkout-process/{CHECKOUT_TOKEN}
+https://checkout.splintr.com/?token={CHECKOUT_TOKEN}
 ```
 Or else, we can use the return param which is called 'checkout_url' and used that to proceed the payment directly to Splintr.
-Find out more about [Create Checkout Request Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-CreateCheckoutRequest)
+Find out more about [Create Checkout Request Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-CreateCheckoutRequest)
 
 ## Get Access Token
 Access tokens are used in token-based authentication to allow a request to access an API. The access token is returned after the user successfully authenticates and authorizes access with the **store secret** and **store key**. After the access token is returned, the user will pass it as a credential in Bearer format (Bearer {Access-Token}) when calling the target API. 
@@ -36,7 +36,7 @@ Access tokens are used in token-based authentication to allow a request to acces
 $getAccessTokenRequest = $splintrClient->generateGetAccessTokenRequest(); // Populate the Access Token Request
 $getAccessTokenResponse = $splintrClient->getAccessToken($getAccessTokenRequest); // Get the Access Token Request data returned
 ```
-Find out more about [Get Access Token Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-GetToken)
+Find out more about [Get Access Token Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-GetToken)
 
 ## Get Request By Token
 A checkout request can be retrieved again by using the token received from the previous checkout request. This token is get by using the method **getToken()** from the Create checkout response.
@@ -45,7 +45,7 @@ A checkout request can be retrieved again by using the token received from the p
 $getRequestByTokenRequest = $splintrClient->generateGetRequestByTokenRequest($createCheckoutResponse->getToken()); // Get the token from create checkout response
 $getRequestByTokenResponse = $splintrClient->getRequestByToken($getRequestByTokenRequest); // Use the received token to retrieve the request again
 ```
-Find out more about [Get Request By Token Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-GetRequestByToken)
+Find out more about [Get Request By Token Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-GetRequestByToken)
 
 ## Initiate Refund
 - When the payment of an order is completed, you can proceed the refund partially or fully by manually inputting the amount.
@@ -62,7 +62,7 @@ $initiateRefundResponse->getRefund()->getRefundId(); // Get the refund Id
 $initiateRefundResponse->getRefund()->getReason(); // Get reason for refund
 $initiateRefundResponse->getRefund()->getAmount(); // Get the amount refunded
 ```
-Find out more about [Initiate Refund Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-InitiateRefund)
+Find out more about [Initiate Refund Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-InitiateRefund)
 
 ## View Inquiry List
 - You can send a request to fetch all the inquiries with parameters such as date range, size (limit) of the list or the offset number of the record, which are used to filter the response data that you want to pull. 
@@ -77,7 +77,7 @@ From the inquiry list returned above, we can access to specific Inquiries which 
 $viewInquiryListResponse->getInquiryList());
 $viewInquiryListResponse->getInquiryList()->getItems());
 ```
-Find out more about [View Inquiry List Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-ViewInquiryList)
+Find out more about [View Inquiry List Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-ViewInquiryList)
 
 ## View Inquiry
 - Within the inquiry list, you can fetch the detail data of a specific inquiry by using its inquiry id.
@@ -92,7 +92,7 @@ $viewInquiryResponse = $splintrClient->viewInquiry($viewInquiryRequest); // Get 
 $viewInquiryResponse->getInquiry();
 $viewInquiryResponse->getInquiry()->getCustomer();
 ```
-Find out more about [View Inquiry Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-ViewInquiry)
+Find out more about [View Inquiry Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-ViewInquiry)
 
 ## View Order List
 - You can send a request to fetch all the orders with parameters such as date range, size (limit) of the list, the offset number of the record or the status of it which are used to filter the response data that you want to pull. 
@@ -105,7 +105,7 @@ To access to order items, we use the method which have been defined in the `Orde
 ```
 $viewOrderListResponse->getOrders()->getItems(); // This will retrieve all the order items from the list
 ```
-Find out more about [View Order List Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-ViewOrderList)
+Find out more about [View Order List Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-ViewOrderList)
 
 ## View Order
 - Within the order list, you can fetch the detail data of a specific order by using its order id.
@@ -120,7 +120,7 @@ $viewOrderResponse = $splintrClient->viewOrder($viewViewOrderRequest); // Get th
 $viewOrderResponse->getOrderDetails()->getOrderId();
 $viewOrderResponse->getOrderDetails()->getSettlements();
 ```
-Find out more about [View Order Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-ViewOrder)
+Find out more about [View Order Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-ViewOrder)
 
 ## View Refund List
 - You can send a request to fetch the refund list of a Merchant with the optional **limit** parameter, default value is 15.
@@ -135,7 +135,7 @@ Through the response, to retrieve the details of the list:
 $viewRefundsListResponse->getCount();
 $viewRefundsListResponse->getRefunds()->getItems();
 ```
-Find out more about [View Refund List Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-ViewRefundsList)
+Find out more about [View Refund List Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-ViewRefundsList)
 
 ## View Settlements List
 - You can send a request to fetch the settlement list of a Merchant with the optional **limit** parameter, default value is 15.
@@ -151,4 +151,4 @@ $viewSettlementsListResponse->getCount();
 $viewSettlementsListResponse->getSettlements()->getItems();
 
 ```
-Find out more about [View Settlements List Reference](https://apidoc.splintr.xyz/#api-MerchantEstore-ViewSettlementsList)
+Find out more about [View Settlements List Reference](https://api.splintr.com/apidoc/index.html#api-MerchantEstore-ViewSettlementsList)

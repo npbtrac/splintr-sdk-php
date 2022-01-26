@@ -77,9 +77,9 @@ $order = new \Splintr\PhpSdk\Models\Order([
 $order->setItems($orderItemCollection);
 $order->setOrdersHistory($ordersHistory);
 $order->setCustomer(new \Splintr\PhpSdk\Models\CustomerContact([
-    'email' => 'test@gmail.com',
-    'phone' => '1458778965',
-    'name' => 'Test Customer',
+    'email' => 'peterego360+testcustomer@gmail.com',
+    'phone' => '+971511223344',
+    'name' => 'Dev User',
     'address' => [
         'line_1' => 'Business Bay',
         'city' => 'Dubai',
@@ -93,9 +93,12 @@ $order->setCustomer(new \Splintr\PhpSdk\Models\CustomerContact([
         'wishlist_count' => '2',
     ]),
 ]));
-$order->setProductTypePdp();
-
+$order->setProductTypeIbp();
 $createCheckoutRequestRequest = $splintrClient->generateCreateCheckoutRequestRequest($order);
 $createCheckoutResponse = $splintrClient->createCheckoutRequest($createCheckoutRequestRequest);
-dump($createCheckoutResponse->isSuccess());
+dump($order);
+dump($createCheckoutResponse);
 dump($createCheckoutResponse->getCheckoutUrl());
+
+$getRequestByTokenRequest = $splintrClient->generateGetRequestByTokenRequest($createCheckoutResponse->getToken());
+dump($getRequestByTokenRequest);

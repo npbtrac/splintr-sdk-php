@@ -15,9 +15,11 @@ use Splintr\PhpSdk\Models\MerchantEstore\ViewInquiryListRequest;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewInquiryListResponse;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewInquiryRequest;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewInquiryResponse;
+use Splintr\PhpSdk\Models\MerchantEstore\ViewOrderByReferenceIdRequest;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewOrderListRequest;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewOrderListResponse;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewOrderRequest;
+use Splintr\PhpSdk\Models\MerchantEstore\ViewOrderByReferenceIdResponse;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewOrderResponse;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewRefundsListRequest;
 use Splintr\PhpSdk\Models\MerchantEstore\ViewRefundsListResponse;
@@ -379,7 +381,7 @@ trait ClientMerchantEstoreTrait
     /**
      * @param ViewSettlementsListRequest $generateViewSettlementsListRequest
      *
-     * @return ApiResponseInterface|ViewRefundsListResponse|null
+     * @return ApiResponseInterface|ViewSettlementsListResponse|null
      * @throws ApiErrorException
      * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
      */
@@ -433,6 +435,44 @@ trait ClientMerchantEstoreTrait
         /** @var InitiateRefundResponse $apiSplintrResponse */
         /** @var Client $this */
         $apiSplintrResponse = $this->generateApiResponse($apiResponse, InitiateRefundResponse::class);
+
+        return $apiSplintrResponse;
+    }
+
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
+    /**
+     * @param $referenceId
+     *
+     * @return ViewOrderByReferenceIdRequest
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
+     */
+    public function generateViewOrderByReferenceIdRequest($referenceId)
+    {
+        /** @var Client $this */
+        return new ViewOrderByReferenceIdRequest([
+            'referenceId' => $referenceId,
+            'apiEndpoint' => $this->buildApiPath('merchant-estore/order/view-by-reference-id'),
+            'apiMethod' => 'get',
+            'apiHeaders' => $this->generateAuthHeader(),
+        ]);
+    }
+
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
+    /**
+     * @param ViewOrderByReferenceIdRequest $generateViewOrderByReferenceIdRequest
+     *
+     * @return ApiResponseInterface|ViewOrderByReferenceIdResponse|null
+     * @throws ApiErrorException
+     * @throws \Splintr\PhpSdkLib\GuzzleHttp\Exception\GuzzleException
+     */
+    public function viewOrderByReferenceId(ViewOrderByReferenceIdRequest $generateViewOrderByReferenceIdRequest)
+    {
+        $apiResponse = $generateViewOrderByReferenceIdRequest->requestApi($this->transport);
+
+        /** @var ViewOrderByReferenceIdResponse $apiSplintrResponse */
+        /** @var Client $this */
+        $apiSplintrResponse = $this->generateApiResponse($apiResponse, ViewOrderByReferenceIdResponse::class);
 
         return $apiSplintrResponse;
     }

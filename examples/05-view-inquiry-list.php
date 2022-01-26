@@ -2,7 +2,9 @@
 /** @var  $splintrClient \Splintr\PhpSdk\Core\Client */
 $splintrClient = require_once('example-client-config.php');
 
-$viewInquiryListRequest = $splintrClient->generateViewInquiryListRequest('2021-01-01', '2021-04-30', '2', '1');
+$startDate = date('Y-m-d', strtotime('- 1 months'));
+$endDate = date('Y-m-d', strtotime('now'));
+$viewInquiryListRequest = $splintrClient->generateViewInquiryListRequest($startDate, $endDate, '2', '1');
 $viewInquiryListResponse = $splintrClient->viewInquiryList($viewInquiryListRequest);
 dump($viewInquiryListResponse);
 dump($viewInquiryListResponse->getInquiryList());
