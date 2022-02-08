@@ -13,15 +13,15 @@ $dotenv->load();
 $dotenv->required(['SPLINTR_API_BASE_URL', 'SPLINTR_STORE_PUBLIC_KEY', 'SPLINTR_STORE_KEY', 'SPLINTR_STORE_SECRET']);
 $dotenv->ifPresent('SPLINTR_DEBUG_MODE')->isBoolean();
 
-$baseUrl = getenv('SPLINTR_API_BASE_URL', null);
-$debugMode = !!getenv('SPLINTR_DEBUG_MODE', true);
+$baseUrl = getenv('SPLINTR_API_BASE_URL');
+$debugMode = !!getenv('SPLINTR_DEBUG_MODE');
 
 $splintrClient = new \Splintr\PhpSdk\Core\Client(
     [
         'baseUrl' => $baseUrl,
-        'storePublicKey' => getenv('SPLINTR_STORE_PUBLIC_KEY', null),
-        'storeKey' => getenv('SPLINTR_STORE_KEY', null),
-        'storeSecret' => getenv('SPLINTR_STORE_SECRET', null),
+        'storePublicKey' => getenv('SPLINTR_STORE_PUBLIC_KEY'),
+        'storeKey' => getenv('SPLINTR_STORE_KEY'),
+        'storeSecret' => getenv('SPLINTR_STORE_SECRET'),
         'debugMode' => $debugMode,
     ]
 );

@@ -14,7 +14,7 @@ class Client
     use ClientMerchantEstoreTrait;
     use ClientAfterCheckoutTrait;
 
-    const PROD_APP_URL = 'https://app.splintr.com';
+    const PROD_APP_URL = 'https://checkout.splintr.com'; // Prod url 'https://checkout.splintr.com'
 
     protected $appUrl;
     protected $baseUrl;
@@ -32,10 +32,7 @@ class Client
     protected $transport = null;
 
     protected $urlMappingApiApp = [
-        'https://linked.splintr.xyz' => 'https://react.splintr.xyz',
-        'https://qa-api.splintrit.com' => 'https://checkout.splintrit.com',
-        'https://sandbox-api.splintr.com' => 'https://sandbox.splintr.com',
-        'https://api.splintr.com' => 'https://app.splintr.com',
+        'https://api.splintr.com' => 'https://checkout.splintr.com',
     ];
 
     /**
