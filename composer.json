@@ -2,7 +2,7 @@
   "name": "npbtrac/splintr-php-sdk",
   "license": "MIT",
   "description": "Splintr PHP Client Library",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "keywords": [
     "spinltr",
     "spinltr php sdk",

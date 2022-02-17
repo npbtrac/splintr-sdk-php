@@ -86,6 +86,7 @@ class Client
     {
         $this->transport = new GuzzleHttpClient([
             'base_uri' => $this->getBaseUrl(),
+            'verify' => false,
         ]);
     }
 
